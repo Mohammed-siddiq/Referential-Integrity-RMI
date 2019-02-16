@@ -7,6 +7,8 @@ import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 
+import com.typesafe.config.Config;
+import com.typesafe.config.ConfigFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -20,11 +22,15 @@ public class ClientOperation {
     public static void main(String[] args) throws RemoteException, NotBoundException, MalformedURLException {
         Logger logger = LoggerFactory.getLogger("ClientOperation");
 
+        logger.debug("Loading Configs");
+        Config conf = ConfigFactory.load("rmi");
 
         logger.info("Starting Client");
 
+        logger.debug(conf.getString("URL"));
+
         //Look for the stub associated with the name
-        MyInterface myServant = (MyInterface) Naming.lookup("rmi://localhost:6060/reference");
+        MyInterface myServant = (MyInterface) Naming.lookup(conf.getString("URL"));
 
         System.out.println(myServant.helloTo("Siddiq!!"));
 
@@ -45,6 +51,7 @@ public class ClientOperation {
 
         logger.info("case 2: Invoking Remote method with two different objects");
         myServant.verifyReferences(builder, newBuilder);
+        logger.info("Exiting Client...");
 
 
     }
