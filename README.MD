@@ -1,4 +1,4 @@
-##Referential Integrity Verification in RMI 
+## Referential Integrity Verification in RMI 
 
 
 Remote Method Invocation in Java allows a client to invoke a method on the server(remote) as though the method exists in the footprint of the client.
