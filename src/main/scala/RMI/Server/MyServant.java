@@ -34,9 +34,19 @@ public class MyServant extends UnicastRemoteObject implements MyInterface {
     @Override
     public Boolean verifyReferences(Object a, Object alias) {
 
+        if (a == alias) {
+            logger.info("case 1.1: == Referential Integrity verified.....");
+            return true;
+
+        }
         if (a.equals(alias)) {
             logger.info("case 1: Referential Integrity verified.....");
             return true;
+        }
+        if (a == alias) {
+            logger.info("case 1.1: == Referential Integrity verified.....");
+            return true;
+
         }
         logger.info("case 2: The two objects passed are different...");
         return false;
